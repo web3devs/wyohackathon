@@ -24,6 +24,9 @@ contract DfsContract is owned {
     mapping(address => uint) public paid;
     mapping(address => uint[]) public teamMembers;
     mapping(uint => uint) public scores;
+    mapping(address => uint) public teamScores;
+
+    address[] registeredTeams;
 
     constructor() public {
         // initial setup
@@ -33,6 +36,7 @@ contract DfsContract is owned {
         require(msg.value > 0, "Fee must be sent"); // Set 0 to whatever the fee needs to be
 
         paid[msg.sender] = msg.value;
+        registeredTeams.push(msg.sender);
     }
 
     function submitTeamMember(uint teamMember) public {
@@ -43,10 +47,24 @@ contract DfsContract is owned {
         scores[player] = score;
     }
 
+    function calculateTeamScores() private {
+        for (uint i = 0; i < registeredTeams.length; i++) {
+            uint tempScore = 0;
+            for(uint players = 0; players < teamMembers[registeredTeams[i]].length; players++) {
+                tempScore = tempScore + scores[teamMembers[registeredTeams[i]][players]];
+            }
+            teamScores[registeredTeams[i]] = tempScore;
+        }
+    }
+
+    function payoutWinner() public onlyOwner {
+        // First, calculate latest scores
+        calculateTeamScores();
+    }
+
     // TODO: pass in salary
     // don't add player if salary is over limit
 
-    // TODO: owner passes in points
     // calculate payouts
 
 
