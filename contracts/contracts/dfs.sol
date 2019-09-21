@@ -22,14 +22,32 @@ contract owned {
 
 contract DfsContract is owned {
     mapping(address => uint) public paid;
+    mapping(address => uint[]) public teamMembers;
+    mapping(uint => uint) public scores;
 
-    //constructor() public {
+    constructor() public {
         // initial setup
-    //}
+    }
 
     function payDues() public payable {
         require(msg.value > 0, "Fee must be sent"); // Set 0 to whatever the fee needs to be
 
         paid[msg.sender] = msg.value;
     }
+
+    function submitTeamMember(uint teamMember) public {
+        teamMembers[msg.sender].push(teamMember);
+    }
+
+    function addScore(uint player, uint score) public onlyOwner {
+        scores[player] = score;
+    }
+
+    // TODO: pass in salary
+    // don't add player if salary is over limit
+
+    // TODO: owner passes in points
+    // calculate payouts
+
+
 }
