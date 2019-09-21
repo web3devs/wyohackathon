@@ -1,7 +1,4 @@
-
-
-
-export default class Football {
+export default class FootballPlugin {
   initializePlugin(pluginContext) {
 
   }

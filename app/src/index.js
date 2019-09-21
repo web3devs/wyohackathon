@@ -6,12 +6,13 @@ import BurnerCore from '@burner-wallet/core';
 import { InjectedSigner, LocalSigner } from '@burner-wallet/core/signers';
 import { InfuraGateway, InjectedGateway, XDaiGateway } from '@burner-wallet/core/gateways';
 import Exchange from '@burner-wallet/exchange';
+import DaedalusPlugin from './daedalus-plugin'
 import { xdaiBridge, uniswapDai } from '@burner-wallet/exchange/pairs';
 import BurnerUI from '@burner-wallet/ui';
 // import LegacyPlugin from '@burner-wallet/plugins/legacy';
 
 // this imports from the plugin
-import Football from './Football';
+import Football from './football-plugin';
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],
@@ -30,7 +31,7 @@ pairs: [xdaiBridge, uniswapDai],
 const BurnerWallet = () =>
 <BurnerUI
 core={core}
-plugins={[exchange, new Football()]}
+plugins={[exchange, new Football(), new DaedalusPlugin({ assetId: 'dai', contractAddress: '0x8f7a0ba4a56bd8cc1655ae99bb147e76d0eb3d35', network: '1' })]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));
