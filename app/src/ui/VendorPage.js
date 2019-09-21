@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import dfsABI from '../football-plugin/abi/DFS.json';
 import OrderSelector from './OrderSelector';
 const classes = require('./VendorPage.module.css');
 
@@ -9,6 +10,14 @@ export default class VendorPage extends Component {
       newName: props.plugin.name,
       setName: props.plugin.name,
     };
+  }
+
+  initializePlugin(pluginContext) {
+    this._pluginContext = pluginContext;
+
+    pluginContext.addPage('/vendors/:vendorName?', VendorPage);
+    pluginContext.addHomeButton('Vendors', '/vendors');
+    pluginContext.onAccountSearch(query => this.vendorSearch(query));
   }
 
   render() {
@@ -25,61 +34,24 @@ export default class VendorPage extends Component {
 
     return (
       <Page title="Pick Your Football Team">
-        <h3>Set your Name</h3>
-        <div className={classes.nameBox}>
-          <input value={newName} onChange={e => this.setState({ newName: e.target.value })} />
+          <input type="checkbox" value="1" />Patrick Mahomes - $5000<br />
+          <input type="checkbox" value="2" />Julio Jones - $3000<br />
+          <input type="checkbox" value="3" />Dalvin Cook - $2500<br />
+          <input type="checkbox" value="4" />Travis Kelce - $3500<br />
+          <input type="checkbox" value="5" />Gardner Minshew - $3000<br />
+          <input type="checkbox" value="6" />Sammy Watkins - $2000<br />
+          <input type="checkbox" value="7" />Christian McCaffrey - $2500<br />
+          <input type="checkbox" value="8" />Emmanuel Sanders - $2000<br />
+          <input type="checkbox" value="9" />Saquon Barkley - $3000<br />
+          <input type="checkbox" value="10" />Antonio Brown - $0
+
           <Button
-            onClick={() => {
-              plugin.setName(newName);
-              this.setState({ setName: newName });
-            }}
-            disabled={newName === setName}
-          >
-            Set Name
-          </Button>
-        </div>
-
-        {vendors.length > 1 && (
-          <Fragment>
-            <h3>Select Vendor</h3>
-            <div className={classes.vendorList}>
-              {vendors.map(vendor => (
-                <Button
-                  key={vendor.id}
-                  onClick={() => actions.navigateTo(`/vendors/${vendor.id}`)}
-                  disabled={selectedVendor && vendor.id === selectedVendor.id}
+                  key={10}
+                  onClick={ () => plugin.testFunction()}
                 >
-                  {vendor.name}
+                  Submit Team
                 </Button>
-              ))}
-            </div>
-          </Fragment>
-        )}
 
-        <h3>Order</h3>
-        {!selectedVendor && <div>Select a vendor</div>}
-        {selectedVendor && accounts.length > 0 && (
-          <AccountBalance
-            asset={asset.id}
-            account={accounts[0]}
-            render={(err, balance) => balance ? (
-              <OrderSelector
-                items={selectedVendor.items}
-                balance={balance}
-                unit={asset.name}
-                burnerComponents={burnerComponents}
-                onSend={(amount, message) => {
-                  actions.send({
-                    asset: asset.id,
-                    ether: amount.toString(),
-                    message: `[${plugin.name}] ${message}`,
-                    to: selectedVendor.address,
-                  });
-                }}
-              />
-           ) : 'Loading...'}
-          />
-        )}
       </Page>
     );
   }
