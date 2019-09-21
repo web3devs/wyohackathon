@@ -24,7 +24,7 @@ export default class VendorPage extends Component {
     }
 
     return (
-      <Page title="Vendors">
+      <Page title="Pick Your Football Team">
         <h3>Set your Name</h3>
         <div className={classes.nameBox}>
           <input value={newName} onChange={e => this.setState({ newName: e.target.value })} />
