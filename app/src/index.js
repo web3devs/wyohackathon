@@ -2,14 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { xdai, dai, eth } from '@burner-wallet/assets';
+import { xdai, ERC20Asset, dai, eth } from '@burner-wallet/assets';
 import BurnerCore from '@burner-wallet/core';
 import { InjectedSigner, LocalSigner } from '@burner-wallet/core/signers';
 import { InfuraGateway, InjectedGateway, XDaiGateway } from '@burner-wallet/core/gateways';
 import Exchange from '@burner-wallet/exchange';
 import { xdaiBridge, uniswapDai } from '@burner-wallet/exchange/pairs';
 import BurnerUI from '@burner-wallet/ui';
-import LegacyPlugin from '@burner-wallet/plugins/legacy';
+// import LegacyPlugin from '@burner-wallet/plugins/legacy';
+
+// this imports from the plugin
+import FootBall from './burner-plugin';
+
+const footBall = new ERC20Asset({
+  id: "exch",
+  name: "EXCH",
+  network: "100",
+  address: "0x9b924c026325d307efb295108bafdfd29ecb3932"
+});
+
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],
@@ -28,7 +39,7 @@ pairs: [xdaiBridge, uniswapDai],
 const BurnerWallet = () =>
 <BurnerUI
 core={core}
-plugins={[exchange, new LegacyPlugin()]}
+plugins={[exchange, new FootBall()]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));
