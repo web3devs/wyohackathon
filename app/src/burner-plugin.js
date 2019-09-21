@@ -8,7 +8,7 @@ export default class FootBall {
         const scan = URLREGEX.exec(qr);
         pluginctx.actions.send({
           to: scan[1],
-          asset: "it",
+          asset: "xdai",
           ether: scan[2],
           message: scan[3]
         });
