@@ -1,0 +1,19 @@
+
+{
+"asset": "xdai",
+"vendors": [
+  {
+    "id": "vendor-id",
+    "name": "Vendor Name",
+    "logo": "http://logo",
+    "address": "0x0000000000000000000000000000000000000000",
+    "items": [
+      {
+        "name": "Item Name",
+        "image": "http://image",
+        "price": "5"
+      }
+    ]
+  }
+]
+}

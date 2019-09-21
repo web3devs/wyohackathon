@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { xdai, dai, eth } from '@burner-wallet/assets';
 import BurnerCore from '@burner-wallet/core';
@@ -9,7 +8,14 @@ import { InfuraGateway, InjectedGateway, XDaiGateway } from '@burner-wallet/core
 import Exchange from '@burner-wallet/exchange';
 import { xdaiBridge, uniswapDai } from '@burner-wallet/exchange/pairs';
 import BurnerUI from '@burner-wallet/ui';
-import LegacyPlugin from '@burner-wallet/plugins/legacy';
+// import LegacyPlugin from '@burner-wallet/plugins/legacy';
+
+// this imports from the plugin
+
+import FootballPlugin from './football-plugin'
+import NewWallet from './newBurner-wallet';
+import VendorPlugin from './VendorPlugin';
+
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],
@@ -25,10 +31,14 @@ const exchange = new Exchange({
 pairs: [xdaiBridge, uniswapDai],
 });
 
+const wallet = new VendorPlugin({
+pairs: [xdaiBridge, uniswapDai],
+});
+
 const BurnerWallet = () =>
 <BurnerUI
 core={core}
-plugins={[exchange, new LegacyPlugin()]}
+plugins={[exchange, new FootballPlugin({ assetId: 'xDai', contractAddress: '0x692a70D2e424a56D2C6C27aA97D1a86395877b3A', network: '100' }), wallet, new NewWallet()]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));
