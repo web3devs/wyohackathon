@@ -12,7 +12,7 @@ import BurnerUI from '@burner-wallet/ui';
 
 // this imports from the plugin
 
-import FootballPlugin from './football-plugin'
+// import FootballPlugin from './football-plugin'
 import VendorPlugin from './VendorPlugin';
 
 

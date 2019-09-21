@@ -1,26 +1,13 @@
-import React, { Component, Fragment } from 'react';
-import dfsABI from '../football-plugin/abi/DFS.json';
-// import OrderSelector from './OrderSelector';
-// const classes = require('./VendorPage.module.css');
+import React, { Component } from 'react';
 
 export default class VendorPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      newName: props.plugin.name,
-      setName: props.plugin.name,
-    };
   }
 
   render() {
-    const { burnerComponents, plugin, match, accounts, actions } = this.props;
-    const { Page, AccountBalance, Button } = burnerComponents;
-    // const selectedVendor = match.params.vendorName ? plugin.getVendor(match.params.vendorName) : null;
-    // const { newName, setName } = this.state;
-    const asset = plugin.getAsset();
-    // const vendors = plugin.getVendors();
-    actions.navigateTo(`/sports`);
-
+    const { burnerComponents, plugin, accounts, actions } = this.props;
+    const { Page, Button } = burnerComponents;
 
     return (
       <Page title="Pick Your Team">
