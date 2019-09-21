@@ -33,7 +33,7 @@ export default class VendorPage extends Component {
     }
 
     return (
-      <Page title="Pick Your Football Team">
+      <Page title="Pick Your Team">
           <input type="checkbox" value="1" />Patrick Mahomes - $5000<br />
           <input type="checkbox" value="2" />Julio Jones - $3000<br />
           <input type="checkbox" value="3" />Dalvin Cook - $2500<br />
