@@ -1,0 +1,10 @@
+.vendorList {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: solid 1px #999999;
+  display: flex;
+  justify-content: space-around;
+}
+.nameBox {
+  display: flex;
+}

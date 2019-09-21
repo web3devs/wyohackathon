@@ -78,20 +78,20 @@ export default class Game extends Component {
   }
 
   async updateGameStatus() {
-    const { plugin, accounts } = this.props;
-    const [account] = accounts;
-    const clueStatus = {};
-    let unlockedAll = true;
-    for (let i = 1; i <= this.state.numClues; i++) {
-      if (plugin.getStoredClue(i)
-        || await plugin.getContract().methods.foundClue(account, i).call()) {
-        clueStatus[i] = true;
-      } else {
-        unlockedAll = false;
-      }
-    }
-    const status = unlockedAll ? 'unlocked' : 'playing';
-    const web3 = plugin.getWeb3();
+    // const { plugin, accounts } = this.props;
+    // const [account] = accounts;
+    // const clueStatus = {};
+    // let unlockedAll = true;
+    // for (let i = 1; i <= this.state.numClues; i++) {
+    //   if (plugin.getStoredClue(i)
+    //     || await plugin.getContract().methods.foundClue(account, i).call()) {
+    //     clueStatus[i] = true;
+    //   } else {
+    //     unlockedAll = false;
+    //   }
+    // }
+    // const status = unlockedAll ? 'unlocked' : 'playing';
+    // const web3 = plugin.getWeb3();
     // const staked = await plugin.getContract().methods.remainingStake(account).call();
     // this.setState({ clueStatus, status, staked: web3.utils.fromWei(staked.toString(), 'ether') });
   }
