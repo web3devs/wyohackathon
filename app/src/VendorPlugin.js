@@ -33,7 +33,7 @@ export default class VendorPlugin {
     let web3 = this.getWeb3(this.network);
     // const account = web3.eth.accounts.privateKeyToAccount();
     // console.log("account",account);
-    console.log("web3", web3.eth.accounts)
+    console.log("sender:", this._pluginContext)
     alert("test")
 
     let contract = this.getContract();
