@@ -1,7 +1,5 @@
 import dfsABI from './abi/DFS.json';
 import Advanced from './ui/Advanced';
-import DiscoverCluePage from './ui/DiscoverCluePage';
-import SecretPhrasePage from './ui/SecretPhrasePage';
 import Game from './ui/Game';
 
 export default class FootballPlugin {
@@ -16,8 +14,7 @@ export default class FootballPlugin {
   initializePlugin(pluginContext) {
     this._pluginContext = pluginContext;
 
-    pluginContext.addPage('/secret', SecretPhrasePage);
-    pluginContext.addPage('/discover/:pk', DiscoverCluePage);
+    // pluginContext.addPage('/secret', SecretPhrasePage);
     pluginContext.addElement('home-middle', Game);
     pluginContext.addElement('advanced', Advanced);
   }
