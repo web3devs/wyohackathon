@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
 export default class VendorPage extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
-    const { burnerComponents, plugin, accounts, actions } = this.props;
+    const { burnerComponents, plugin } = this.props;
     const { Page, Button } = burnerComponents;
 
     return (

@@ -30,12 +30,6 @@ const exchange = new Exchange({
 pairs: [xdaiBridge, uniswapDai],
 });
 
-const football = new VendorPlugin({
-  assetId: 'xdai',
-  contractAddress: '0x797A9A300249AB72E52090B511C26adcA0bA108a',
-  network: '100'
-});
-
 const BurnerWallet = () =>
 <BurnerUI
 title="WyoHackathon"
