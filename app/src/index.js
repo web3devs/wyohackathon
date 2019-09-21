@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { xdai, ERC20Asset, dai, eth } from '@burner-wallet/assets';
 import BurnerCore from '@burner-wallet/core';
