@@ -1,6 +1,6 @@
 const DfsContract = artifacts.require("DfsContract");
 
-contract("MetaCoin", accounts => {
+contract("DfsContract", accounts => {
     it("should deploy contract", () =>
       DfsContract.deployed()
         .then(balance => {
@@ -28,6 +28,25 @@ contract("MetaCoin", accounts => {
             duesAmount,
             "Dues were not paid successfully"
           );
+
+    });
+
+    it("should add members to team", async () => {
+
+        let playerOne = 12;
+        let playerTwo = 18;
+
+        let instance = await DfsContract.deployed();
+
+        returnValue = await instance.submitTeamMember(playerOne);
+
+        teamMember = await instance.teamMembers.call(accounts[0],0);
+
+        assert.equal(
+            playerOne,
+            teamMember.toNumber(),
+            "Player was not added"
+        );
 
     });
     

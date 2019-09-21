@@ -22,14 +22,21 @@ contract owned {
 
 contract DfsContract is owned {
     mapping(address => uint) public paid;
+    mapping(address => uint[]) public teamMembers;
 
-    //constructor() public {
+    constructor() public {
         // initial setup
-    //}
+    }
 
     function payDues() public payable {
         require(msg.value > 0, "Fee must be sent"); // Set 0 to whatever the fee needs to be
 
         paid[msg.sender] = msg.value;
     }
+
+    function submitTeamMember(uint teamMember) public {
+        teamMembers[msg.sender].push(teamMember);
+    }
+
+
 }
