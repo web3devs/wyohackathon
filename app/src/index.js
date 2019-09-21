@@ -31,7 +31,8 @@ pairs: [xdaiBridge, uniswapDai],
 });
 
 const football = new VendorPlugin({
-  contractAddress: '0x692a70D2e424a56D2C6C27aA97D1a86395877b3A',
+  assetId: 'xdai',
+  contractAddress: '0x797A9A300249AB72E52090B511C26adcA0bA108a',
   network: '100'
 });
 
@@ -39,7 +40,9 @@ const BurnerWallet = () =>
 <BurnerUI
 title="WyoHackathon"
 core={core}
-plugins={[exchange, football]}
+plugins={[exchange, new VendorPlugin({  assetId: 'xdai',
+  contractAddress: '0x797A9A300249AB72E52090B511C26adcA0bA108a',
+  network: '100'})]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));

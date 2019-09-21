@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import dfsABI from '../football-plugin/abi/DFS.json';
-import OrderSelector from './OrderSelector';
-const classes = require('./VendorPage.module.css');
+// import OrderSelector from './OrderSelector';
+// const classes = require('./VendorPage.module.css');
 
 export default class VendorPage extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class VendorPage extends Component {
     const { Page, AccountBalance, Button } = burnerComponents;
     // const selectedVendor = match.params.vendorName ? plugin.getVendor(match.params.vendorName) : null;
     // const { newName, setName } = this.state;
-    // const asset = plugin.getAsset();
+    const asset = plugin.getAsset();
     // const vendors = plugin.getVendors();
     actions.navigateTo(`/sports`);
 
