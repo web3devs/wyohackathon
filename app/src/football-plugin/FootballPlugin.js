@@ -1,6 +1,6 @@
 import dfsABI from './abi/DFS.json';
-import Advanced from './ui/Advanced';
-import Game from './ui/Game';
+// import Advanced from './ui/Advanced';
+// import Game from './ui/Game';
 
 export default class FootballPlugin {
   constructor({ assetId, contractAddress, network }) {
@@ -15,8 +15,8 @@ export default class FootballPlugin {
     this._pluginContext = pluginContext;
 
     // pluginContext.addPage('/secret', SecretPhrasePage);
-    pluginContext.addElement('home-middle', Game);
-    pluginContext.addElement('advanced', Advanced);
+    // pluginContext.addElement('home-middle', Game);
+    // pluginContext.addElement('advanced', Advanced);
   }
 
   getContract() {
