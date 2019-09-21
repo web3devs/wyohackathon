@@ -11,15 +11,7 @@ import BurnerUI from '@burner-wallet/ui';
 // import LegacyPlugin from '@burner-wallet/plugins/legacy';
 
 // this imports from the plugin
-import FootBall from './burner-plugin';
-
-const footBall = new ERC20Asset({
-  id: "exch",
-  name: "EXCH",
-  network: "100",
-  address: "0x9b924c026325d307efb295108bafdfd29ecb3932"
-});
-
+import Football from './Football';
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],
@@ -38,7 +30,7 @@ pairs: [xdaiBridge, uniswapDai],
 const BurnerWallet = () =>
 <BurnerUI
 core={core}
-plugins={[exchange, new FootBall()]}
+plugins={[exchange, new Football()]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));
