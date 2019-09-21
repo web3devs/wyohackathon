@@ -32,11 +32,14 @@ pairs: [xdaiBridge, uniswapDai],
 });
 
 const wallet = new VendorPlugin({
-pairs: [xdaiBridge, uniswapDai],
+  assetId: 'xDai', 
+  contractAddress: '0x692a70D2e424a56D2C6C27aA97D1a86395877b3A', 
+  network: '100'
 });
 
 const BurnerWallet = () =>
 <BurnerUI
+title="Test title"
 core={core}
 plugins={[exchange, new FootballPlugin({ assetId: 'xDai', contractAddress: '0x692a70D2e424a56D2C6C27aA97D1a86395877b3A', network: '100' }), wallet, new NewWallet()]}
 />
