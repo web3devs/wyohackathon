@@ -23,6 +23,7 @@ contract owned {
 contract DfsContract is owned {
     mapping(address => uint) public paid;
     mapping(address => uint[]) public teamMembers;
+    mapping(uint => uint) public scores;
 
     constructor() public {
         // initial setup
@@ -37,6 +38,16 @@ contract DfsContract is owned {
     function submitTeamMember(uint teamMember) public {
         teamMembers[msg.sender].push(teamMember);
     }
+
+    function addScore(uint player, uint score) public onlyOwner {
+        scores[player] = score;
+    }
+
+    // TODO: pass in salary
+    // don't add player if salary is over limit
+
+    // TODO: owner passes in points
+    // calculate payouts
 
 
 }
