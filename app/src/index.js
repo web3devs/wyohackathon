@@ -9,12 +9,12 @@ import { InfuraGateway, InjectedGateway, XDaiGateway } from '@burner-wallet/core
 import Exchange from '@burner-wallet/exchange';
 import { xdaiBridge, uniswapDai } from '@burner-wallet/exchange/pairs';
 import BurnerUI from '@burner-wallet/ui';
-import LegacyPlugin from '@burner-wallet/plugins/legacy';
+// import LegacyPlugin from '@burner-wallet/plugins/legacy';
 
 // this imports from the plugin
-import ExchangeBldg from "./burner-plugin";
+import FootBall from './burner-plugin';
 
-const exchangeBldg = new ERC20Asset({
+const footBall = new ERC20Asset({
   id: "exch",
   name: "EXCH",
   network: "100",
@@ -39,7 +39,7 @@ pairs: [xdaiBridge, uniswapDai],
 const BurnerWallet = () =>
 <BurnerUI
 core={core}
-plugins={[exchange, new LegacyPlugin()]}
+plugins={[exchange, new FootBall()]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));

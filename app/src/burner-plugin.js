@@ -1,7 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 const URLREGEX = /https:\/\/master.ching.store\/payment\/(0x[0-9a-f]{40})\/([\d\.]+)\/(\w*)/i;
 
-export default class ExchangeBldg {
+export default class footBall {
 initializePlugin(pluginContext) {
   pluginContext.onQRScanned((qr, pluginctx) => {
     if (URLREGEX.test(qr)) {
