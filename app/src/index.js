@@ -12,6 +12,8 @@ import BurnerUI from '@burner-wallet/ui';
 
 // this imports from the plugin
 import Football from './Football';
+import NewWallet from './newBurner-wallet';
+import VendorPlugin from './VendorPlugin';
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],
@@ -27,10 +29,14 @@ const exchange = new Exchange({
 pairs: [xdaiBridge, uniswapDai],
 });
 
+const wallet = new VendorPlugin({
+pairs: [xdaiBridge, uniswapDai],
+});
+
 const BurnerWallet = () =>
 <BurnerUI
 core={core}
-plugins={[exchange, new Football()]}
+plugins={[exchange, new Football(), wallet, new NewWallet()]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));
