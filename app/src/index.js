@@ -13,7 +13,6 @@ import BurnerUI from '@burner-wallet/ui';
 // this imports from the plugin
 
 import FootballPlugin from './football-plugin'
-import NewWallet from './newBurner-wallet';
 import VendorPlugin from './VendorPlugin';
 
 
@@ -31,17 +30,16 @@ const exchange = new Exchange({
 pairs: [xdaiBridge, uniswapDai],
 });
 
-const wallet = new VendorPlugin({
-  assetId: 'xDai', 
-  contractAddress: '0x692a70D2e424a56D2C6C27aA97D1a86395877b3A', 
+const football = new VendorPlugin({
+  contractAddress: '0x692a70D2e424a56D2C6C27aA97D1a86395877b3A',
   network: '100'
 });
 
 const BurnerWallet = () =>
 <BurnerUI
-title="Test title"
+title="WyoHackathon"
 core={core}
-plugins={[exchange, new FootballPlugin({ assetId: 'xDai', contractAddress: '0x692a70D2e424a56D2C6C27aA97D1a86395877b3A', network: '100' }), wallet, new NewWallet()]}
+plugins={[exchange, football]}
 />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'));

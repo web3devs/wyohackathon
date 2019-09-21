@@ -12,25 +12,15 @@ export default class VendorPage extends Component {
     };
   }
 
-  initializePlugin(pluginContext) {
-    this._pluginContext = pluginContext;
-
-    pluginContext.addPage('/vendors/:vendorName?', VendorPage);
-    pluginContext.addHomeButton('Vendors', '/vendors');
-    pluginContext.onAccountSearch(query => this.vendorSearch(query));
-  }
-
   render() {
     const { burnerComponents, plugin, match, accounts, actions } = this.props;
     const { Page, AccountBalance, Button } = burnerComponents;
-    const selectedVendor = match.params.vendorName ? plugin.getVendor(match.params.vendorName) : null;
-    const { newName, setName } = this.state;
-    const asset = plugin.getAsset();
-    const vendors = plugin.getVendors();
+    // const selectedVendor = match.params.vendorName ? plugin.getVendor(match.params.vendorName) : null;
+    // const { newName, setName } = this.state;
+    // const asset = plugin.getAsset();
+    // const vendors = plugin.getVendors();
+    actions.navigateTo(`/sports`);
 
-    if (vendors.length === 1 && !selectedVendor) {
-      actions.navigateTo(`/vendors/${vendors[0].id}`);
-    }
 
     return (
       <Page title="Pick Your Team">
@@ -46,11 +36,11 @@ export default class VendorPage extends Component {
           <input type="checkbox" value="10" />Antonio Brown - $0
 
           <Button
-                  key={10}
-                  onClick={ () => plugin.testFunction()}
-                >
-                  Submit Team
-                </Button>
+            key={10}
+            onClick={ () => plugin.testFunction()}
+          >
+            Submit Team
+          </Button>
 
       </Page>
     );
