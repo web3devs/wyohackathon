@@ -1,85 +1,53 @@
-import React, { Component, Fragment } from 'react';
-import OrderSelector from './OrderSelector';
-const classes = require('./VendorPage.module.css');
+import React, { Component } from 'react';
 
 export default class VendorPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      newName: props.plugin.name,
-      setName: props.plugin.name,
-    };
   }
 
-  render() {
-    const { burnerComponents, plugin, match, accounts, actions } = this.props;
-    const { Page, AccountBalance, Button } = burnerComponents;
-    const selectedVendor = match.params.vendorName ? plugin.getVendor(match.params.vendorName) : null;
-    const { newName, setName } = this.state;
-    const asset = plugin.getAsset();
-    const vendors = plugin.getVendors();
+  async testFunction() {
+    const { assets, plugin, accounts, defaultAccount} = this.props;
+    const contract = plugin.getContract();
+    console.log("plugin", plugin);
+    console.log("assets", assets);
+    console.log("accounts", accounts);
+    console.log("contract", contract);
+    console.log("props", this.props);
+    console.log("sender:", accounts[0])
 
-    if (vendors.length === 1 && !selectedVendor) {
-      actions.navigateTo(`/vendors/${vendors[0].id}`);
-    }
+    // let contract = this.getContract();
+    let returnValue = await contract.methods.payDues().send({
+      from: accounts[0],
+      value: 1
+    });
+    console.log(returnValue);
+  }
+
+
+  render() {
+    const { burnerComponents, plugin } = this.props;
+    const { Page, Button } = burnerComponents;
 
     return (
-      <Page title="Pick Your Football Team">
-        <h3>Set your Name</h3>
-        <div className={classes.nameBox}>
-          <input value={newName} onChange={e => this.setState({ newName: e.target.value })} />
+      <Page title="Pick Your Team">
+          <input type="checkbox" value="1" />Patrick Mahomes - $5000<br />
+          <input type="checkbox" value="2" />Julio Jones - $3000<br />
+          <input type="checkbox" value="3" />Dalvin Cook - $2500<br />
+          <input type="checkbox" value="4" />Travis Kelce - $3500<br />
+          <input type="checkbox" value="5" />Gardner Minshew - $3000<br />
+          <input type="checkbox" value="6" />Sammy Watkins - $2000<br />
+          <input type="checkbox" value="7" />Christian McCaffrey - $2500<br />
+          <input type="checkbox" value="8" />Emmanuel Sanders - $2000<br />
+          <input type="checkbox" value="9" />Saquon Barkley - $3000<br />
+          <input type="checkbox" value="10" />Antonio Brown - $0
+
           <Button
-            onClick={() => {
-              plugin.setName(newName);
-              this.setState({ setName: newName });
-            }}
-            disabled={newName === setName}
+            key={10}
+            onClick={ () => this.testFunction()}
           >
-            Set Name
+            Submit Team
           </Button>
-        </div>
 
-        {vendors.length > 1 && (
-          <Fragment>
-            <h3>Select Vendor</h3>
-            <div className={classes.vendorList}>
-              {vendors.map(vendor => (
-                <Button
-                  key={vendor.id}
-                  onClick={() => actions.navigateTo(`/vendors/${vendor.id}`)}
-                  disabled={selectedVendor && vendor.id === selectedVendor.id}
-                >
-                  {vendor.name}
-                </Button>
-              ))}
-            </div>
-          </Fragment>
-        )}
-
-        <h3>Order</h3>
-        {!selectedVendor && <div>Select a vendor</div>}
-        {selectedVendor && accounts.length > 0 && (
-          <AccountBalance
-            asset={asset.id}
-            account={accounts[0]}
-            render={(err, balance) => balance ? (
-              <OrderSelector
-                items={selectedVendor.items}
-                balance={balance}
-                unit={asset.name}
-                burnerComponents={burnerComponents}
-                onSend={(amount, message) => {
-                  actions.send({
-                    asset: asset.id,
-                    ether: amount.toString(),
-                    message: `[${plugin.name}] ${message}`,
-                    to: selectedVendor.address,
-                  });
-                }}
-              />
-           ) : 'Loading...'}
-          />
-        )}
       </Page>
     );
   }

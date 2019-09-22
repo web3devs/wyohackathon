@@ -1,46 +1,31 @@
 import VendorPage from './ui/VendorPage';
-import vendors from './vendors.json';
-
-const NAME_KEY = 'burner-vendor-name';
+import dfsABI from './abi/DFS.json';
 
 export default class VendorPlugin {
-  constructor() {
-    this.name = window.localStorage.getItem(NAME_KEY) || '';
+  constructor({assetId, contractAddress, network}) {
+    this.assetId = assetId;
+    this.contractAddress = contractAddress;
+    this.network = network;
+
+    this.contract = null;
   }
 
   initializePlugin(pluginContext) {
     this._pluginContext = pluginContext;
 
-    pluginContext.addPage('/vendors/:vendorName?', VendorPage);
-    pluginContext.addHomeButton('Vendors', '/vendors');
-    pluginContext.onAccountSearch(query => this.vendorSearch(query));
+    pluginContext.addHomeButton('Sports', '/sports');
+    pluginContext.addPage('/sports', VendorPage);
   }
 
-  setName(newName) {
-    this.name = newName;
-    window.localStorage.setItem(NAME_KEY, newName);
-  }
-
-  getVendors() {
-    return vendors.vendors;
-  }
-
-  getAsset() {
-    const [asset] = this._pluginContext.getAssets().filter(asset => asset.id === vendors.asset);
-    if (!asset) {
-      throw new Error(`Can't find vendor asset ${vendors.asset}`)
+  getContract() {
+    if (!this.contract) {
+      const web3 = this._pluginContext.getWeb3(this.network);
+      this.contract = new web3.eth.Contract(dfsABI, this.contractAddress);
     }
-    return asset;
+    return this.contract;
   }
 
-  getVendor(id) {
-    const [vendor] = vendors.vendors.filter(vendor => vendor.id === id);
-    return vendor;
-  }
-
-  vendorSearch(query) {
-    return query.length === 0
-      ? []
-      : vendors.vendors.filter(vendor => vendor.name.toLowerCase().indexOf(query) === 0);
+  getWeb3() {
+    return this._pluginContext.getWeb3(this.network);
   }
 }
