@@ -66,7 +66,7 @@ export default class VendorPage extends Component {
           </Button>
           <br /><br />
           {this.state.duesStatus ? <DuesPaid /> : <DuesNotPaid />}
-
+          
       </Page>
     );
   }
