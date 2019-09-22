@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 
 export default class VendorPage extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  async testFunction() {
+    const { assets, plugin, accounts, defaultAccount} = this.props;
+    const contract = plugin.getContract();
+    console.log("plugin", plugin);
+    console.log("assets", assets);
+    console.log("accounts", accounts);
+    console.log("contract", contract);
+    console.log("props", this.props);
+    console.log("sender:", accounts[0])
+
+    // let contract = this.getContract();
+    let returnValue = await contract.methods.payDues().send({
+      from: accounts[0],
+      value: 1
+    });
+    console.log(returnValue);
+  }
 
 
   render() {
@@ -22,7 +43,7 @@ export default class VendorPage extends Component {
 
           <Button
             key={10}
-            onClick={ () => plugin.testFunction()}
+            onClick={ () => this.testFunction()}
           >
             Submit Team
           </Button>
