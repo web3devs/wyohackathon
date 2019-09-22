@@ -13,6 +13,6 @@ export default function toDecimal(weiInput, decimals) {
   fraction = fraction.match(/^([0-9]*[1-9]|0)(0*)/)[1]
 
   const whole = wei.div(base).toString(10);
-  const value = `${whole}${fraction == '0' ? '' : `.${fraction}`}`;
+  const value = `${whole}${fraction === '0' ? '' : `.${fraction}`}`;
   return value;
 }

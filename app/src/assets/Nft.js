@@ -1,25 +1,16 @@
-// const { fromWei, toWei } = require('web3-utils');
-// const pricefeed = require('./pricefeed');
 import toDecimal from './utils/decimals';
 
-const PRICE_POLL_INTERVAL = 15 * 1000;
-
 export default class Nft {
-  constructor({ id, name, network, usdPrice, priceSymbol, type=null, decimals=0 }) {
+  constructor({ address, id, name, network, type=null, decimals=0 }) {
+    this.address = address;
     this.id = id;
     this.name = name;
     this.network = network;
-    this.usdPrice = usdPrice;
-    this.priceSymbol = priceSymbol;
     this.type = type;
 
     this.decimals = decimals;
 
     this.cleanupFunctions = [];
-
-    if (priceSymbol) {
-      this._startPricePolling();
-    }
   }
 
   setCore(core) {
@@ -32,21 +23,6 @@ export default class Nft {
 
   async getTx(txHash) {
     throw new Error('Not implemented');
-  }
-
-  getDisplayValue(value, decimals=2) {
-    const displayVal = toDecimal(value.toString(), this.decimals);
-    if (displayVal.indexOf('.') !== -1) {
-      return displayVal.substr(0, displayVal.indexOf('.') + decimals + 1);
-    }
-    return displayVal;
-  }
-
-  getUSDValue(value, decimals=2) {
-    if (this.usdPrice) {
-      return (+this.getDisplayValue(value, 10) * this.usdPrice).toFixed(decimals);
-    }
-    throw new Error('USD price not available');
   }
 
   async getBalance(account) {
