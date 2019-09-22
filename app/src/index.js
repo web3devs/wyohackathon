@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import { xdai, dai, eth } from '@burner-wallet/assets';
+import { xdai, dai, eth, ERC20Asset } from '@burner-wallet/assets';
 import BurnerCore from '@burner-wallet/core';
 import { InjectedSigner, LocalSigner } from '@burner-wallet/core/signers';
 import { InfuraGateway, InjectedGateway, XDaiGateway } from '@burner-wallet/core/gateways';
@@ -14,6 +14,14 @@ import BurnerUI from '@burner-wallet/ui';
 
 // import FootballPlugin from './football-plugin'
 import VendorPlugin from './VendorPlugin';
+import Nft from './assets/Nft.js'
+
+const nft = new Nft({
+  id: "nft",
+  name: "Trophies",
+  network: "100",
+  address: "0xA20258B0c9F0F43Ee08785EA89FbE5b9d636d475"
+});
 
 
 const core = new BurnerCore({
@@ -23,7 +31,7 @@ const core = new BurnerCore({
     new InfuraGateway(process.env.REACT_APP_INFURA_KEY),
     new XDaiGateway(),
     ],
-    assets: [xdai, dai, eth],
+    assets: [xdai, dai, eth, nft],
 });
 
 const exchange = new Exchange({
