@@ -2,7 +2,7 @@
   "name": "my-wallet",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://web3devs.github.io/",
+  "homepage": "https://web3devs.github.io/wyohackathon",
   "dependencies": {
     "@burner-wallet/assets": "^0.0.21",
     "@burner-wallet/core": "^0.0.24",
@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
