@@ -92,5 +92,24 @@ contract("DfsContract", accounts => {
             "Score is not correct"
         );
     });
+
+    it("should calculate scores", async() => {
+        let playerId = 15;
+        let newScore = 2;
+
+        let instance = await DfsContract.deployed();
+
+        returnValue = await instance.addScore(playerId,newScore);
+
+        returnValue = await instance.payoutWinner();
+
+        playerOneScore = await instance.teamScores.call(accounts[0]);
+
+        assert.equal(
+            playerOneScore.toNumber(),
+            2,
+            "Score is not calculated correctly"
+        );
+    });
     
 });
