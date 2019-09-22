@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 
+
+const DuesNotPaid = () => (
+  <div style={{ color: 'red' }}>Team is not selected</div>
+);
+
+const DuesPaid = () => (
+  <div style={{ color: 'green' }}>Team submitted</div>
+);
+
+
 export default class VendorPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      duesStatus: 0
+    }
   }
 
   async testFunction() {
@@ -21,6 +34,9 @@ export default class VendorPage extends Component {
       value: 1
     });
     console.log(returnValue);
+    this.setState({
+      duesStatus: 1
+    })
   }
 
 
@@ -44,10 +60,13 @@ export default class VendorPage extends Component {
           <Button
             key={10}
             onClick={ () => this.testFunction()}
+            disabled={this.state.duesStatus}
           >
             Submit Team
           </Button>
-
+          <br /><br />
+          {this.state.duesStatus ? <DuesPaid /> : <DuesNotPaid />}
+          
       </Page>
     );
   }
