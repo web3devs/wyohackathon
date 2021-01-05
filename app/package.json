@@ -9,7 +9,7 @@
     "@burner-wallet/exchange": "^0.0.5",
     "@burner-wallet/plugins": "^0.0.3",
     "@burner-wallet/ui": "^0.0.36",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bip39": "^3.0.2",
     "gh-pages": "^2.1.1",
     "react": "^16.9.0",
